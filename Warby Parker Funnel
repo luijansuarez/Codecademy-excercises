@@ -1,0 +1,9 @@
+WITH funnel AS (SELECT DISTINCT Q.user_id AS 'user_id',
+ CASE WHEN H.user_id IS NOT NULL THEN 'TRUE' ELSE 'FALSE' END AS 'is_home_try_on', 
+ H.number_of_pairs AS 'number_of_pairs', 
+ CASE WHEN P.user_id IS NOT NULL THEN 'TRUE' ELSE 'FALSE' END AS 'is_purchase' 
+ FROM quiz AS 'Q'
+ LEFT JOIN home_try_on AS 'H'
+ ON Q.user_id=H.user_id
+ LEFT JOIN purchase AS 'P'
+ ON H.user_id=P.user_id)
